@@ -1,3 +1,4 @@
+#[derive(Debug)]
 struct HelloMess<T> {
     name: T,
     age: i32,
@@ -9,7 +10,7 @@ fn main() {
         age: 745
     };
 
-    let name = p::<String>(p1.name.to_string());
+    let name = p(format!("{:?}", p1));
 
     let hello_name = format!("Hello, {}!", name);
 
