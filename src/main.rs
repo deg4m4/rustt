@@ -1,21 +1,29 @@
-use std::{str::FromStr, fmt::Display};
+struct HelloMess<T> {
+    name: T,
+    age: i32,
+}
 
 fn main() {
+    let p1 = HelloMess {
+        name: 4267,
+        age: 745
+    };
 
-    let h = p("Hello, Pka!");
-    let f = p(232);
-    let s = p("1234".to_string());
+    let name = p::<String>(p1.name.to_string());
+
+    let hello_name = format!("Hello, {}!", name);
+
+    println!("{}", hello_name);
 
 }
 
 fn p<T>(n: T) -> T
-where T: ToString
+where
+    T: ToString,
 {
-
     let p: String = n.to_string();
 
     println!("{}", p);
 
     n
-
 }
