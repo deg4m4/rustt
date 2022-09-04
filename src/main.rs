@@ -1,30 +1,13 @@
-#[derive(Debug)]
-struct HelloMess<T> {
-    name: T,
-    age: i32,
-}
+mod server;
+
+use server::run_server;
 
 fn main() {
-    let p1 = HelloMess {
-        name: 4267,
-        age: 745
-    };
-
-    let name = p(format!("{:?}", p1));
-
-    let hello_name = format!("Hello, {}!", name);
-
-    println!("{}", hello_name);
-
-}
-
-fn p<T>(n: T) -> T
-where
-    T: ToString,
-{
-    let p: String = n.to_string();
-
-    println!("{}", p);
-
-    n
+    tokio::runtime::Builder::new_multi_thread()
+        .enable_all()
+        .build()
+        .unwrap()
+        .block_on(async {
+            run_server().await;
+        })
 }
